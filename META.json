@@ -43,7 +43,7 @@
       "runtime" : {
          "requires" : {
             "List::Util" : "1.45",
-            "Text::ANSI::Fold" : "1.08",
+            "Text::ANSI::Fold" : "2.01",
             "perl" : "v5.14.0"
          }
       },

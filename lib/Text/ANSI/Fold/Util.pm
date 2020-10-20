@@ -7,7 +7,7 @@ use warnings;
 use Data::Dumper;
 
 use Exporter qw(import);
-our @EXPORT_OK = qw(&ansi_width &ansi_substr);
+our @EXPORT_OK;
 our %EXPORT_TAGS = ( all => [ @EXPORT_OK ] );
 
 use List::Util qw(max);
@@ -19,20 +19,27 @@ use Text::ANSI::Fold qw(ansi_fold);
 
 Text::ANSI::Fold::Util - Text::ANSI::Fold utilities
 
+=head1 VERSION
+
+Version 0.01
+
 =head1 SYNOPSIS
 
     use Text::ANSI::Fold::Util qw(:all);
-    use Text::ANSI::Fold::Util qw(ansi_width ansi_substr);
+    use Text::ANSI::Fold::Util qw(ansi_width ansi_substr ansi_expand);
     ansi_width($text);
     ansi_substr($text, $offset, $width [, $replacement]);
+    ansi_expand($text);
 
     use Text::ANSI::Fold::Util;
     Text::ANSI::Fold::Util::width($text);
     Text::ANSI::Fold::Util::substr($text, ...);
+    Text::ANSI::Fold::Util::expand($text);
 
 =head1 DESCRIPTION
 
-This is a collection of utilities using Text::ANSI::Fold module.
+This is a collection of utilities using Text::ANSI::Fold module.  All
+functions are aware of ANSI terminal sequence.
 
 =head1 FUNCTION
 
@@ -52,9 +59,8 @@ Returns visual width of given text.
 
 =cut
 
-sub ansi_width {
-    goto &width;
-}
+BEGIN { push @EXPORT_OK, qw(&ansi_width) }
+sub ansi_width { goto &width }
 
 sub width {
     (ansi_fold($_[0], -1))[2];
@@ -77,9 +83,8 @@ course.  Its behavior depends on the implementation of lower module.
 
 =cut
 
-sub ansi_substr {
-    goto &substr;
-}
+BEGIN { push @EXPORT_OK, qw(&ansi_substr) }
+sub ansi_substr { goto &substr }
 
 sub substr {
     my($text, $offset, $length, $replacement) = @_;
@@ -96,6 +101,28 @@ sub substr {
     }
 }
 
+=item B<expand>(I<text>, ...)
+
+=item B<ansi_expand>(I<text>, ...)
+
+Expand tabs.  Default tabstop is 8.  To change it, use with B<tabstop>
+parameter.
+
+    expand("text", tabstop => 4);
+
+Unlike L<Text::Tabs::expand>, it does not take text list or
+multiple-line-text.
+
+=cut
+
+BEGIN { push @EXPORT_OK, qw(&ansi_expand) }
+sub ansi_expand { goto &expand }
+
+sub expand {
+    my $text = shift;
+    (ansi_fold($text, -1, expand => 1, @_))[0];
+}
+
 =back
 
 =cut
@@ -110,7 +137,7 @@ L<Text::ANSI::Fold>
 
 =head1 LICENSE
 
-Copyright (C) 2020 Kazumasa Utashiro.
+Copyright 2020 Kazumasa Utashiro.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
