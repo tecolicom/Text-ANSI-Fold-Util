@@ -101,6 +101,7 @@ sub substr {
     }
 }
 
+
 =item B<expand>(I<text>, ...)
 
 =item B<ansi_expand>(I<text>, ...)
@@ -119,17 +120,12 @@ our $tabstop = 8;
 
 sub expand {
     my @l = map {
-	join('',
-	     map {
-		 !/\t/ ? $_ :
-		     (ansi_fold($_, -1, expand => 1, tabstop => $tabstop))[0];
-	     }
-	     split(/^/m, $_, -1));
+	s { ^ ( .* \t ) } {
+	    (ansi_fold($1, -1, expand => 1, tabstop => $tabstop))[0];
+	}xmger;
     } @_;
-    return @l if wantarray;
-    return $l[0];
+    wantarray ? @l : $l[0];
 }
-
 
 =back
 
