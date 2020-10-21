@@ -1,6 +1,6 @@
 # NAME
 
-Text::ANSI::Fold::Util - Text::ANSI::Fold utilities
+Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr, expand)
 
 # VERSION
 
@@ -50,14 +50,18 @@ unexportable functions without them.
 - **expand**(_text_, ...)
 - **ansi\_expand**(_text_, ...)
 
-    Expand tabs.  Default tabstop is 8.  To change it, use with **tabstop**
-    parameter.
+    Expand tabs.  Interface is compatible with [Text::Tabs](https://metacpan.org/pod/Text::Tabs)::expand().
 
-        expand("text", tabstop => 4);
+    Dafault tabstop is 8, and can be accessed through
+    `$Text::ANSI::Fold::Util::tabstop` variable.
 
 # SEE ALSO
 
-[Text::ANSI::Fold](https://metacpan.org/pod/Text::ANSI::Fold)
+[Text::ANSI::Fold::Util](https://metacpan.org/pod/Text::ANSI::Fold::Util), [https://github.com/kaz-utashiro/Text-ANSI-Fold-Util](https://github.com/kaz-utashiro/Text-ANSI-Fold-Util)
+
+[Text::ANSI::Fold](https://metacpan.org/pod/Text::ANSI::Fold), [https://github.com/kaz-utashiro/Text-ANSI-Fold](https://github.com/kaz-utashiro/Text-ANSI-Fold)
+
+[Text::Tabs](https://metacpan.org/pod/Text::Tabs)
 
 # LICENSE
 

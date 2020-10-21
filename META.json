@@ -1,5 +1,5 @@
 {
-   "abstract" : "Text::ANSI::Fold utilities",
+   "abstract" : "Text::ANSI::Fold utilities (width, substr, expand)",
    "author" : [
       "Kazumasa Utashiro."
    ],

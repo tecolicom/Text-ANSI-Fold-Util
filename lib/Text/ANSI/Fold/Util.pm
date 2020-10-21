@@ -17,7 +17,7 @@ use Text::ANSI::Fold qw(ansi_fold);
 
 =head1 NAME
 
-Text::ANSI::Fold::Util - Text::ANSI::Fold utilities
+Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr, expand)
 
 =head1 VERSION
 
@@ -105,23 +105,31 @@ sub substr {
 
 =item B<ansi_expand>(I<text>, ...)
 
-Expand tabs.  Default tabstop is 8.  To change it, use with B<tabstop>
-parameter.
+Expand tabs.  Interface is compatible with L<Text::Tabs>::expand().
 
-    expand("text", tabstop => 4);
-
-Unlike L<Text::Tabs::expand>, it does not take text list or
-multiple-line-text.
+Dafault tabstop is 8, and can be accessed through
+C<$Text::ANSI::Fold::Util::tabstop> variable.
 
 =cut
 
-BEGIN { push @EXPORT_OK, qw(&ansi_expand) }
+BEGIN { push @EXPORT_OK, qw(&ansi_expand $tabstop) }
 sub ansi_expand { goto &expand }
 
+our $tabstop = 8;
+
 sub expand {
-    my $text = shift;
-    (ansi_fold($text, -1, expand => 1, @_))[0];
+    my @l = map {
+	join('',
+	     map {
+		 !/\t/ ? $_ :
+		     (ansi_fold($_, -1, expand => 1, tabstop => $tabstop))[0];
+	     }
+	     split(/^/m, $_, -1));
+    } @_;
+    return @l if wantarray;
+    return $l[0];
 }
+
 
 =back
 
@@ -133,7 +141,11 @@ __END__
 
 =head1 SEE ALSO
 
-L<Text::ANSI::Fold>
+L<Text::ANSI::Fold::Util>, L<https://github.com/kaz-utashiro/Text-ANSI-Fold-Util>
+
+L<Text::ANSI::Fold>, L<https://github.com/kaz-utashiro/Text-ANSI-Fold>
+
+L<Text::Tabs>
 
 =head1 LICENSE
 
