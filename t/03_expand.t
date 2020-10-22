@@ -11,13 +11,16 @@ Text::ANSI::Fold->configure(expand => 1);
 
 sub r { $_[0] =~ s/(\S+)/\e[31m$1\e[m/gr }
 
-for my $t (split "\n", <<"END"
-#1234567890123456789
-0	89	67
-0123		67
-01234567	67
+my $pattern = <<"END";
+#12345670123456701
+0	01	01
+	0	01
+0123		01
+01234567	01
+		01
 END
-) {
+
+for my $t (split "\n", $pattern) {
     next if $t =~ /^#/;
     my $x = expand $t;
     for my $p (
@@ -30,13 +33,7 @@ END
     }
 }
 
-for my $t (<<"END"
-#1234567890123456789
-0	89	67
-0123		67
-01234567	67
-END
-) {
+for my $t ($pattern) {
     my $x = expand $t;
     for my $p (
 	[ $t => $x ],

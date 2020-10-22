@@ -117,12 +117,15 @@ BEGIN { push @EXPORT_OK, qw(&ansi_expand $tabstop) }
 sub ansi_expand { goto &expand }
 
 our $tabstop = 8;
+our $spacechar = ' ';
 
 sub expand {
     my @l = map {
-	s { ^ ( .* \t ) } {
+	s{^(\t+)}{ $spacechar x ($tabstop * length($1)) }mge;
+	s{^(.*\t)}{
 	    (ansi_fold($1, -1, expand => 1, tabstop => $tabstop))[0];
-	}xmger;
+	}mge;
+	$_;
     } @_;
     wantarray ? @l : $l[0];
 }
