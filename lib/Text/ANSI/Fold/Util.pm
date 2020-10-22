@@ -1,5 +1,5 @@
 package Text::ANSI::Fold::Util;
-our $VERSION = "0.02";
+our $VERSION = "0.03";
 
 use v5.14;
 use utf8;
@@ -21,7 +21,7 @@ Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr, expand)
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
 
 =head1 SYNOPSIS
 
