@@ -118,7 +118,7 @@ an array reference, as well as C<< Text::ANSI::Fold->configure >> call.
     ansi_expand($opt, @text);
 
     Text::ANSI::Fold->configure(tabhead => 'T', tabspace => '_');
-    ansi_expand($opt);
+    ansi_expand(@text);
 
 =cut
 
