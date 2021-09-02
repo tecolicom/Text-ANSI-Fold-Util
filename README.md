@@ -62,7 +62,7 @@ unexportable functions without them.
         ansi_expand($opt, @text);
 
         Text::ANSI::Fold->configure(tabhead => 'T', tabspace => '_');
-        ansi_expand($opt);
+        ansi_expand(@text);
 
 # SEE ALSO
 

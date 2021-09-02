@@ -1,10 +1,10 @@
 {
    "abstract" : "Text::ANSI::Fold utilities (width, substr, expand)",
    "author" : [
-      "Kazumasa Utashiro."
+      "Kazumasa Utashiro <kaz@utashiro.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v3.1.10, CPAN::Meta::Converter version 2.150010",
+   "generated_by" : "Minilla/v3.1.12, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
@@ -67,9 +67,6 @@
    },
    "version" : "0.05",
    "x_authority" : "cpan:UTASHIRO",
-   "x_contributors" : [
-      "Kazumasa Utashiro <kaz@utashiro.com>"
-   ],
    "x_serialization_backend" : "JSON::PP version 4.04",
    "x_static_install" : 1
 }

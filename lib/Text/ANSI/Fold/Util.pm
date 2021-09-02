@@ -138,6 +138,39 @@ sub expand {
     wantarray ? @l : $l[0];
 }
 
+BEGIN { push @EXPORT_OK, qw(&ansi_unexpand) }
+sub ansi_unexpand { goto &unexpand }
+
+sub unexpand {
+    my @opt = ref $_[0] eq 'ARRAY' ? @{+shift} : ();
+    my @l = map {
+	s{^(.*[ ])}{
+	    _unexpand($1, tabstop => $tabstop, @opt)
+	}mger;
+    } @_;
+    wantarray ? @l : $l[0];
+}
+
+sub _unexpand {
+    local $_ = shift;
+    my %opt = @_;
+    my $fold = Text::ANSI::Fold->new;
+    my $ret = '';
+    my $ts = $opt{tabstop};
+    my $margin = 0;
+    while (length $_) {
+	my $width = $ts + $margin;
+	(my $cut, $_, my $w) = $fold->fold($_, width => $width);
+	if ($w == $width) {
+	    $cut =~ s/ +$/\t/;
+	} else {
+	    $margin = $width - $w;
+	}
+	$ret .= $cut;
+    }
+    $ret;
+}
+
 =back
 
 =cut
