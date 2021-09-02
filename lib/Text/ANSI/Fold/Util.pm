@@ -138,6 +138,18 @@ sub expand {
     wantarray ? @l : $l[0];
 }
 
+=item B<unexpand>(I<text>, ...)
+
+=item B<ansi_unexpand>(I<text>, ...)
+
+Unexpand tabs.  Interface is compatible with
+L<Text::Tabs>::unexpand().  Dafault tabstop is same as C<ansi_expand>.
+
+Current implementation replace white spaces to tab only when they are
+not ANSI-colored.
+
+=cut
+
 BEGIN { push @EXPORT_OK, qw(&ansi_unexpand) }
 sub ansi_unexpand { goto &unexpand }
 
@@ -152,21 +164,24 @@ sub unexpand {
 }
 
 sub _unexpand {
-    local $_ = shift;
+    my $s = shift;
     my %opt = @_;
     my $fold = Text::ANSI::Fold->new;
     my $ret = '';
-    my $ts = $opt{tabstop};
-    my $margin = 0;
-    while (length $_) {
-	my $width = $ts + $margin;
-	(my $cut, $_, my $w) = $fold->fold($_, width => $width);
+    my $width = $opt{tabstop};
+    while (length $s) {
+	my($a, $b, $w) = $fold->fold($s, width => $width);
 	if ($w == $width) {
-	    $cut =~ s/ +$/\t/;
+	    $s = $b;
+	    $ret .= $a =~ s/ +/\t/r;
+	    $width = $opt{tabstop};
 	} else {
-	    $margin = $width - $w;
+	    if ($b eq '') {
+		$ret .= $a;
+		last;
+	    }
+	    $width += $opt{tabstop};
 	}
-	$ret .= $cut;
     }
     $ret;
 }

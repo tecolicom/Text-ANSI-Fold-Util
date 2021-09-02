@@ -64,6 +64,15 @@ unexportable functions without them.
         Text::ANSI::Fold->configure(tabhead => 'T', tabspace => '_');
         ansi_expand(@text);
 
+- **unexpand**(_text_, ...)
+- **ansi\_unexpand**(_text_, ...)
+
+    Unexpand tabs.  Interface is compatible with
+    [Text::Tabs](https://metacpan.org/pod/Text::Tabs)::unexpand().  Dafault tabstop is same as `ansi_expand`.
+
+    Current implementation replace white spaces to tab only when they are
+    not ANSI-colored.
+
 # SEE ALSO
 
 [Text::ANSI::Fold::Util](https://metacpan.org/pod/Text::ANSI::Fold::Util), [https://github.com/kaz-utashiro/Text-ANSI-Fold-Util](https://github.com/kaz-utashiro/Text-ANSI-Fold-Util)

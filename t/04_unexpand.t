@@ -72,11 +72,18 @@ binmode STDOUT, ':encoding(utf8)';
 binmode STDERR, ':encoding(utf8)';
 
 for (
+     [ '' => '', 'null' ],
      [ '一' => '一', 'no tab' ],
+     [ '        ' => "\t", 'single tab' ],
+     [ '        ' x 2 => "\t\t", 'double tab' ],
      [ '        x' => "\tx", 'head' ],
+     [ '         x' => "\t x", 'head+' ],
      [ '一      x' => "一\tx", 'middle' ],
+     [ '一       x' => "一\t x", 'middle+' ],
      [ '一二三  x' =>
        "一二三\tx",'middle' ],
+     [ '一二三  一二三  x' =>
+       "一二三\t一二三\tx",'middle x 2' ],
      [ '一二三四        x' =>
        "一二三四\tx", 'boundary' ],
      [ 'x一二三四       x' =>
@@ -85,7 +92,12 @@ for (
        "x一二三四一二三四\tx", 'double wide boundary' ],
     ) {
     my($s, $a, $msg) = @$_;
-    is(ansi_unexpand($s), $a, $msg);
+    my $u = ansi_unexpand($s);
+    is($u, $a, $msg);
+
+    my $rs = r($a);
+    my $ru = ansi_unexpand(r($s));
+    is($ru, $rs, "(color) $msg");
 }
 
 done_testing;
