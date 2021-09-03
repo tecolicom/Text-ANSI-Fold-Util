@@ -13,11 +13,13 @@ Version 0.05
     ansi_width($text);
     ansi_substr($text, $offset, $width [, $replacement]);
     ansi_expand($text);
+    ansi_unexpand($text);
 
     use Text::ANSI::Fold::Util;
     Text::ANSI::Fold::Util::width($text);
     Text::ANSI::Fold::Util::substr($text, ...);
     Text::ANSI::Fold::Util::expand($text);
+    Text::ANSI::Fold::Util::unexpand($text);
 
 # DESCRIPTION
 
@@ -41,7 +43,7 @@ unexportable functions without them.
     position is calculated by the visible width on the screen instead of
     number of characters.
 
-    If an optional _replacemnt_ parameter is given, replace the substring
+    If an optional _replacement_ parameter is given, replace the substring
     by the replacement and return the entire string.
 
     It does not cut the text in the middle of multi-byte character, of
@@ -52,7 +54,7 @@ unexportable functions without them.
 
     Expand tabs.  Interface is compatible with [Text::Tabs](https://metacpan.org/pod/Text::Tabs)::expand().
 
-    Dafault tabstop is 8, and can be accessed through
+    Default tabstop is 8, and can be accessed through
     `$Text::ANSI::Fold::Util::tabstop` variable.
 
     Option for underlying **ansi\_fold** can be passed by first parameter as
@@ -68,10 +70,10 @@ unexportable functions without them.
 - **ansi\_unexpand**(_text_, ...)
 
     Unexpand tabs.  Interface is compatible with
-    [Text::Tabs](https://metacpan.org/pod/Text::Tabs)::unexpand().  Dafault tabstop is same as `ansi_expand`.
+    [Text::Tabs](https://metacpan.org/pod/Text::Tabs)::unexpand().  Default tabstop is same as `ansi_expand`.
 
-    Current implementation replace white spaces to tab only when they are
-    not ANSI-colored.
+    Please be aware that, current implementation may leave some redundant
+    color designation code.
 
 # SEE ALSO
 

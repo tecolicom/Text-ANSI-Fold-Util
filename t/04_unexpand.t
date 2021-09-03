@@ -16,7 +16,11 @@ use Data::Dumper;
 
 Text::ANSI::Fold->configure(expand => 1);
 
-sub r { $_[0] =~ s/(\S+)/\e[31m$1\e[m/gr }
+sub r {
+    my $opt = ref $_[0] ? shift : {};
+    my $pattern = $opt->{pattern} ||  q/\S+/;
+    $_[0] =~ s/($pattern)/\e[41m$1\e[m/gr;
+}
 
 my $pattern = <<"END";
 #12345670123456701
@@ -71,6 +75,18 @@ for my $t ($pattern) {
 binmode STDOUT, ':encoding(utf8)';
 binmode STDERR, ':encoding(utf8)';
 
+my $color_re    = qr{ \e \[ [\d;]* m }x;
+my $reset_re    = qr{ \e \[ [0;]* m }x;
+my $erase_re    = qr{ \e \[ [\d;]* K }x;
+my $end_re      = qr{ $reset_re | $erase_re }x;
+my $csi_re      = qr{
+    # see ECMA-48 5.4 Control sequences
+    \e \[		# csi
+    [\x30-\x3f]*	# parameter bytes
+    [\x20-\x2f]*	# intermediate bytes
+    [\x40-\x7e]		# final byte
+}x;
+
 for (
      [ '' => '', 'null' ],
      [ '一' => '一', 'no tab' ],
@@ -91,13 +107,37 @@ for (
      [ 'x一二三四一二三四       x' =>
        "x一二三四一二三四\tx", 'double wide boundary' ],
     ) {
-    my($s, $a, $msg) = @$_;
-    my $u = ansi_unexpand($s);
-    is($u, $a, $msg);
 
-    my $rs = r($a);
-    my $ru = ansi_unexpand(r($s));
-    is($ru, $rs, "(color) $msg");
+    my($s, $a, $msg) = @$_;
+
+    if (1) {
+	my $u = ansi_unexpand($s);
+	is($u, $a, $msg)
+	    or warn Dumper $u, $s;
+    }
+
+    if (1) {
+	my $rs = r($a);
+	my $ru = ansi_unexpand(r($s));
+	is($ru, $rs, "$msg (color non-space)")
+	    or warn Dumper $ru, $rs;
+    };
+
+    if (1) {
+	my $opt = { pattern => q/\s+/ };
+	my $rs = r($opt, $a);
+	my $ru = ansi_unexpand(r($opt, $s));
+	is($ru, $rs, "$msg (color space)")
+	    or warn Dumper $ru, $rs;
+    }
+
+    if (1) {
+	my $opt = { pattern => q/.+/ };
+	my $rs = r($opt, $a);
+	my $ru = ansi_unexpand(r($opt, $s));
+	is($ru, $rs, "$msg (color all)")
+	    or warn Dumper $ru, $rs;
+    }
 }
 
 done_testing;

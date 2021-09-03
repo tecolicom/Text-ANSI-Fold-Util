@@ -30,11 +30,13 @@ Version 0.05
     ansi_width($text);
     ansi_substr($text, $offset, $width [, $replacement]);
     ansi_expand($text);
+    ansi_unexpand($text);
 
     use Text::ANSI::Fold::Util;
     Text::ANSI::Fold::Util::width($text);
     Text::ANSI::Fold::Util::substr($text, ...);
     Text::ANSI::Fold::Util::expand($text);
+    Text::ANSI::Fold::Util::unexpand($text);
 
 =head1 DESCRIPTION
 
@@ -75,7 +77,7 @@ Returns substring just like Perl's B<substr> function, but string
 position is calculated by the visible width on the screen instead of
 number of characters.
 
-If an optional I<replacemnt> parameter is given, replace the substring
+If an optional I<replacement> parameter is given, replace the substring
 by the replacement and return the entire string.
 
 It does not cut the text in the middle of multi-byte character, of
@@ -108,7 +110,7 @@ sub substr {
 
 Expand tabs.  Interface is compatible with L<Text::Tabs>::expand().
 
-Dafault tabstop is 8, and can be accessed through
+Default tabstop is 8, and can be accessed through
 C<$Text::ANSI::Fold::Util::tabstop> variable.
 
 Option for underlying B<ansi_fold> can be passed by first parameter as
@@ -143,44 +145,59 @@ sub expand {
 =item B<ansi_unexpand>(I<text>, ...)
 
 Unexpand tabs.  Interface is compatible with
-L<Text::Tabs>::unexpand().  Dafault tabstop is same as C<ansi_expand>.
+L<Text::Tabs>::unexpand().  Default tabstop is same as C<ansi_expand>.
 
-Current implementation replace white spaces to tab only when they are
-not ANSI-colored.
+Please be aware that, current implementation may leave some redundant
+color designation code.
 
 =cut
 
 BEGIN { push @EXPORT_OK, qw(&ansi_unexpand) }
 sub ansi_unexpand { goto &unexpand }
 
+my $reset_re    = qr{ \e \[ [0;]* m }x;
+my $erase_re    = qr{ \e \[ [\d;]* K }x;
+my $end_re      = qr{ $reset_re | $erase_re }x;
+my $csi_re      = qr{
+    # see ECMA-48 5.4 Control sequences
+    \e \[		# csi
+    [\x30-\x3f]*	# parameter bytes
+    [\x20-\x2f]*	# intermediate bytes
+    [\x40-\x7e]		# final byte
+}x;
+
+our $REMOVE_REDUNDANT = 1;
+
 sub unexpand {
     my @opt = ref $_[0] eq 'ARRAY' ? @{+shift} : ();
     my @l = map {
-	s{^(.*[ ])}{
-	    _unexpand($1, tabstop => $tabstop, @opt)
-	}mger;
+	s{ (.*[ ].*) }{ _unexpand($1) }xmger
     } @_;
+    if ($REMOVE_REDUNDANT) {
+	for (@l) {
+	    1 while s{ (?<c>$csi_re+) \K (?<s>[^\e]*) $end_re \g{c} }{$+{s}}xg;
+	}
+    }
     wantarray ? @l : $l[0];
 }
 
 sub _unexpand {
     my $s = shift;
-    my %opt = @_;
-    my $fold = Text::ANSI::Fold->new;
     my $ret = '';
-    my $width = $opt{tabstop};
+    my $width = $tabstop;
+    state $fold = Text::ANSI::Fold->new;
     while (length $s) {
 	my($a, $b, $w) = $fold->fold($s, width => $width);
 	if ($w == $width) {
 	    $s = $b;
-	    $ret .= $a =~ s/ +/\t/r;
-	    $width = $opt{tabstop};
+	    $ret .= $a =~ s/([ ]+)(?= $end_re* $)/\t/xr;
+	    $width = $tabstop;
 	} else {
 	    if ($b eq '') {
 		$ret .= $a;
 		last;
 	    }
-	    $width += $opt{tabstop};
+	    $width += $tabstop;
 	}
     }
     $ret;
@@ -214,3 +231,6 @@ it under the same terms as Perl itself.
 Kazumasa Utashiro E<lt>kaz@utashiro.comE<gt>
 
 =cut
+
+#  LocalWords:  ansi utf substr unexpand exportable unexportable
+#  LocalWords:  tabstop tabhead tabspace Kazumasa Utashiro
