@@ -1,3 +1,4 @@
+[![Actions Status](https://github.com/kaz-utashiro/Text-ANSI-Fold-Util/workflows/test/badge.svg)](https://github.com/kaz-utashiro/Text-ANSI-Fold-Util/actions) [![MetaCPAN Release](https://badge.fury.io/pl/Text-ANSI-Fold-Util.svg)](https://metacpan.org/release/Text-ANSI-Fold-Util)
 # NAME
 
 Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
