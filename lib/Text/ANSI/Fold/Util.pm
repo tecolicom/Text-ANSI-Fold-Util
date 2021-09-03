@@ -1,5 +1,5 @@
 package Text::ANSI::Fold::Util;
-our $VERSION = "0.05";
+our $VERSION = "0.06";
 
 use v5.14;
 use utf8;
@@ -36,7 +36,7 @@ Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
 
 =head1 VERSION
 
-Version 0.05
+Version 0.06
 
 =head1 DESCRIPTION
 
@@ -130,8 +130,10 @@ __END__
 =head1 SEE ALSO
 
 L<Text::ANSI::Fold::Util>,
-L<Text::ANSI::Fold::Tabs>,
 L<https://github.com/kaz-utashiro/Text-ANSI-Fold-Util>
+
+L<Text::ANSI::Fold::Tabs>,
+L<https://github.com/kaz-utashiro/Text-ANSI-Fold-Tabs>
 
 L<Text::ANSI::Fold>,
 L<https://github.com/kaz-utashiro/Text-ANSI-Fold>

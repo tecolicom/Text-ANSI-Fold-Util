@@ -20,7 +20,7 @@ Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
 
 # VERSION
 
-Version 0.05
+Version 0.06
 
 # DESCRIPTION
 
@@ -60,8 +60,10 @@ unexportable functions without them.
 # SEE ALSO
 
 [Text::ANSI::Fold::Util](https://metacpan.org/pod/Text::ANSI::Fold::Util),
-[Text::ANSI::Fold::Tabs](https://metacpan.org/pod/Text::ANSI::Fold::Tabs),
 [https://github.com/kaz-utashiro/Text-ANSI-Fold-Util](https://github.com/kaz-utashiro/Text-ANSI-Fold-Util)
+
+[Text::ANSI::Fold::Tabs](https://metacpan.org/pod/Text::ANSI::Fold::Tabs),
+[https://github.com/kaz-utashiro/Text-ANSI-Fold-Tabs](https://github.com/kaz-utashiro/Text-ANSI-Fold-Tabs)
 
 [Text::ANSI::Fold](https://metacpan.org/pod/Text::ANSI::Fold),
 [https://github.com/kaz-utashiro/Text-ANSI-Fold](https://github.com/kaz-utashiro/Text-ANSI-Fold)
