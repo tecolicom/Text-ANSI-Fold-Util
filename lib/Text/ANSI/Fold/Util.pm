@@ -182,25 +182,20 @@ sub unexpand {
 }
 
 sub _unexpand {
-    my $s = shift;
+    local $_ = shift;
     my $ret = '';
-    my $width = $tabstop;
-    state $fold = Text::ANSI::Fold->new;
-    while (length $s) {
-	my($a, $b, $w) = $fold->fold($s, width => $width);
+    my $margin = 0;
+    while (/ /) {
+	my $width = $tabstop + $margin;
+	my($a, $b, $w) = ansi_fold($_, $width);
 	if ($w == $width) {
-	    $s = $b;
-	    $ret .= $a =~ s/([ ]+)(?= $end_re* $)/\t/xr;
-	    $width = $tabstop;
-	} else {
-	    if ($b eq '') {
-		$ret .= $a;
-		last;
-	    }
-	    $width += $tabstop;
+	    $a =~ s/([ ]+)(?= $end_re* $)/\t/x;
 	}
+	$margin = $width - $w;
+	$ret .= $a;
+	$_ = $b;
     }
-    $ret;
+    $ret . $_;
 }
 
 =back
