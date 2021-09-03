@@ -19,10 +19,6 @@ use Text::ANSI::Fold qw(ansi_fold);
 
 Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
 
-=head1 VERSION
-
-Version 0.05
-
 =head1 SYNOPSIS
 
     use Text::ANSI::Fold::Util qw(:all);
@@ -34,12 +30,13 @@ Version 0.05
     Text::ANSI::Fold::Util::width($text);
     Text::ANSI::Fold::Util::substr($text, ...);
 
-    # These are available but moved to Text::ANSI::Tabs
-
+    # ansi_expand() was moved to Text::ANSI::Tabs
     ansi_expand($text);
-    ansi_unexpand($text);
     Text::ANSI::Fold::Util::expand($text);
-    Text::ANSI::Fold::Util::unexpand($text);
+
+=head1 VERSION
+
+Version 0.05
 
 =head1 DESCRIPTION
 
@@ -111,21 +108,16 @@ sub substr {
 
 =item B<ansi_expand>(I<text>, ...)
 
-=item B<unexpand>(I<text>, ...)
-
-=item B<ansi_unexpand>(I<text>, ...)
-
-These functions are now provided in L<Text::ANSI::Tabs> module.
-Interfaces are remained only for backward compatibility, and may be
-deprecated in the future.
+This function is now moved to L<Text::ANSI::Tabs> module.  Interface
+remains only for backward compatibility, and may be deprecated in the
+future.
 
 =cut
 
-use Text::ANSI::Tabs qw(ansi_expand ansi_unexpand);
-BEGIN { push @EXPORT_OK, qw(&ansi_expand &ansi_unexpand) }
-*tabstop  = \$Text::ANSI::Tabs::tabstop;
-*expand   = \&Text::ANSI::Tabs::expand;
-*unexpand = \&Text::ANSI::Tabs::unexpand;
+use Text::ANSI::Tabs qw(ansi_expand);
+BEGIN { push @EXPORT_OK, qw(&ansi_expand) }
+*tabstop = \$Text::ANSI::Tabs::tabstop;
+*expand  = \&Text::ANSI::Tabs::expand;
 
 =back
 
@@ -155,9 +147,9 @@ it under the same terms as Perl itself.
 
 =head1 AUTHOR
 
-Kazumasa Utashiro E<lt>kaz@utashiro.comE<gt>
+Kazumasa Utashiro
 
 =cut
 
-#  LocalWords:  ansi utf substr unexpand exportable unexportable
+#  LocalWords:  ansi utf substr exportable unexportable
 #  LocalWords:  tabstop tabhead tabspace Kazumasa Utashiro

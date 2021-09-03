@@ -3,10 +3,6 @@
 
 Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
 
-# VERSION
-
-Version 0.05
-
 # SYNOPSIS
 
     use Text::ANSI::Fold::Util qw(:all);
@@ -18,12 +14,13 @@ Version 0.05
     Text::ANSI::Fold::Util::width($text);
     Text::ANSI::Fold::Util::substr($text, ...);
 
-    # These are available but moved to Text::ANSI::Tabs
-
+    # ansi_expand() was moved to Text::ANSI::Tabs
     ansi_expand($text);
-    ansi_unexpand($text);
     Text::ANSI::Fold::Util::expand($text);
-    Text::ANSI::Fold::Util::unexpand($text);
+
+# VERSION
+
+Version 0.05
 
 # DESCRIPTION
 
@@ -55,12 +52,10 @@ unexportable functions without them.
 
 - **expand**(_text_, ...)
 - **ansi\_expand**(_text_, ...)
-- **unexpand**(_text_, ...)
-- **ansi\_unexpand**(_text_, ...)
 
-    These functions are now provided in [Text::ANSI::Tabs](https://metacpan.org/pod/Text::ANSI::Tabs) module.
-    Interfaces are remained only for backward compatibility, and may be
-    deprecated in the future.
+    This function is now moved to [Text::ANSI::Tabs](https://metacpan.org/pod/Text::ANSI::Tabs) module.  Interface
+    remains only for backward compatibility, and may be deprecated in the
+    future.
 
 # SEE ALSO
 
@@ -82,4 +77,4 @@ it under the same terms as Perl itself.
 
 # AUTHOR
 
-Kazumasa Utashiro <kaz@utashiro.com>
+Kazumasa Utashiro
