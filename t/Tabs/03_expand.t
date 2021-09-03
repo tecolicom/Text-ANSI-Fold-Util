@@ -3,7 +3,7 @@ use warnings;
 use Test::More 0.98;
 use utf8;
 
-use Text::ANSI::Fold::Util qw(ansi_expand);
+use Text::ANSI::Tabs qw(ansi_expand);
 use Text::Tabs;
 use Data::Dumper;
 

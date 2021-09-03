@@ -5,7 +5,7 @@ use utf8;
 use open IO => ':utf8', ':std';
 use Encode;
 
-use Text::ANSI::Fold::Util qw(ansi_expand ansi_unexpand);
+use Text::ANSI::Tabs qw(ansi_expand ansi_unexpand);
 use Text::Tabs;
 use Data::Dumper;
 {
@@ -17,7 +17,7 @@ use Data::Dumper;
 sub r {
     my $opt = ref $_[0] ? shift : {};
     my $pattern = $opt->{pattern} ||  q/\S+/;
-    $_[0] =~ s/($pattern)/\e[41m$1\e[m\e[K/gr;
+    $_[0] =~ s/($pattern)/\e[41m$1\e[m/gr;
 }
 
 my $pattern = <<"END";
