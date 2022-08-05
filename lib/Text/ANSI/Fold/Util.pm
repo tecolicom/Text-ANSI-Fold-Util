@@ -132,8 +132,8 @@ __END__
 L<Text::ANSI::Fold::Util>,
 L<https://github.com/kaz-utashiro/Text-ANSI-Fold-Util>
 
-L<Text::ANSI::Fold::Tabs>,
-L<https://github.com/kaz-utashiro/Text-ANSI-Fold-Tabs>
+L<Text::ANSI::Tabs>,
+L<https://github.com/kaz-utashiro/Text-ANSI-Tabs>
 
 L<Text::ANSI::Fold>,
 L<https://github.com/kaz-utashiro/Text-ANSI-Fold>
