@@ -30,10 +30,6 @@ Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
     Text::ANSI::Fold::Util::width($text);
     Text::ANSI::Fold::Util::substr($text, ...);
 
-    # ansi_expand() was moved to Text::ANSI::Tabs
-    ansi_expand($text);
-    Text::ANSI::Fold::Util::expand($text);
-
 =head1 VERSION
 
 Version 0.07
@@ -104,21 +100,6 @@ sub substr {
 }
 
 
-=item B<expand>(I<text>, ...)
-
-=item B<ansi_expand>(I<text>, ...)
-
-This function is now moved to L<Text::ANSI::Tabs> module.  Interface
-remains only for backward compatibility, and may be deprecated in the
-future.
-
-=cut
-
-use Text::ANSI::Tabs qw(ansi_expand);
-BEGIN { push @EXPORT_OK, qw(&ansi_expand) }
-*tabstop = \$Text::ANSI::Tabs::tabstop;
-*expand  = \&Text::ANSI::Tabs::expand;
-
 =back
 
 =cut
@@ -140,16 +121,16 @@ L<https://github.com/kaz-utashiro/Text-ANSI-Fold>
 
 L<Text::Tabs>
 
-=head1 LICENSE
-
-Copyright 2020-2021 Kazumasa Utashiro.
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 =head1 AUTHOR
 
 Kazumasa Utashiro
+
+=head1 LICENSE
+
+Copyright 2020-2022 Kazumasa Utashiro.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut
 

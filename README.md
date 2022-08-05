@@ -14,10 +14,6 @@ Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
     Text::ANSI::Fold::Util::width($text);
     Text::ANSI::Fold::Util::substr($text, ...);
 
-    # ansi_expand() was moved to Text::ANSI::Tabs
-    ansi_expand($text);
-    Text::ANSI::Fold::Util::expand($text);
-
 # VERSION
 
 Version 0.07
@@ -50,13 +46,6 @@ unexportable functions without them.
     It does not cut the text in the middle of multi-byte character, of
     course.  Its behavior depends on the implementation of lower module.
 
-- **expand**(_text_, ...)
-- **ansi\_expand**(_text_, ...)
-
-    This function is now moved to [Text::ANSI::Tabs](https://metacpan.org/pod/Text%3A%3AANSI%3A%3ATabs) module.  Interface
-    remains only for backward compatibility, and may be deprecated in the
-    future.
-
 # SEE ALSO
 
 [Text::ANSI::Fold::Util](https://metacpan.org/pod/Text%3A%3AANSI%3A%3AFold%3A%3AUtil),
@@ -70,13 +59,13 @@ unexportable functions without them.
 
 [Text::Tabs](https://metacpan.org/pod/Text%3A%3ATabs)
 
-# LICENSE
-
-Copyright 2020-2021 Kazumasa Utashiro.
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
 # AUTHOR
 
 Kazumasa Utashiro
+
+# LICENSE
+
+Copyright 2020-2022 Kazumasa Utashiro.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
