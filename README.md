@@ -20,7 +20,7 @@ Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
 
 # VERSION
 
-Version 0.06
+Version 0.07
 
 # DESCRIPTION
 
@@ -53,22 +53,22 @@ unexportable functions without them.
 - **expand**(_text_, ...)
 - **ansi\_expand**(_text_, ...)
 
-    This function is now moved to [Text::ANSI::Tabs](https://metacpan.org/pod/Text::ANSI::Tabs) module.  Interface
+    This function is now moved to [Text::ANSI::Tabs](https://metacpan.org/pod/Text%3A%3AANSI%3A%3ATabs) module.  Interface
     remains only for backward compatibility, and may be deprecated in the
     future.
 
 # SEE ALSO
 
-[Text::ANSI::Fold::Util](https://metacpan.org/pod/Text::ANSI::Fold::Util),
+[Text::ANSI::Fold::Util](https://metacpan.org/pod/Text%3A%3AANSI%3A%3AFold%3A%3AUtil),
 [https://github.com/kaz-utashiro/Text-ANSI-Fold-Util](https://github.com/kaz-utashiro/Text-ANSI-Fold-Util)
 
-[Text::ANSI::Fold::Tabs](https://metacpan.org/pod/Text::ANSI::Fold::Tabs),
+[Text::ANSI::Fold::Tabs](https://metacpan.org/pod/Text%3A%3AANSI%3A%3AFold%3A%3ATabs),
 [https://github.com/kaz-utashiro/Text-ANSI-Fold-Tabs](https://github.com/kaz-utashiro/Text-ANSI-Fold-Tabs)
 
-[Text::ANSI::Fold](https://metacpan.org/pod/Text::ANSI::Fold),
+[Text::ANSI::Fold](https://metacpan.org/pod/Text%3A%3AANSI%3A%3AFold),
 [https://github.com/kaz-utashiro/Text-ANSI-Fold](https://github.com/kaz-utashiro/Text-ANSI-Fold)
 
-[Text::Tabs](https://metacpan.org/pod/Text::Tabs)
+[Text::Tabs](https://metacpan.org/pod/Text%3A%3ATabs)
 
 # LICENSE
 
