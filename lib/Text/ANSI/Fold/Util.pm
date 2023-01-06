@@ -111,13 +111,13 @@ __END__
 =head1 SEE ALSO
 
 L<Text::ANSI::Fold::Util>,
-L<https://github.com/kaz-utashiro/Text-ANSI-Fold-Util>
+L<https://github.com/tecolicom/Text-ANSI-Fold-Util>
 
 L<Text::ANSI::Tabs>,
-L<https://github.com/kaz-utashiro/Text-ANSI-Tabs>
+L<https://github.com/tecolicom/Text-ANSI-Tabs>
 
 L<Text::ANSI::Fold>,
-L<https://github.com/kaz-utashiro/Text-ANSI-Fold>
+L<https://github.com/tecolicom/Text-ANSI-Fold>
 
 L<Text::Tabs>
 
@@ -127,7 +127,7 @@ Kazumasa Utashiro
 
 =head1 LICENSE
 
-Copyright 2020-2022 Kazumasa Utashiro.
+Copyright 2020-2023 Kazumasa Utashiro.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
