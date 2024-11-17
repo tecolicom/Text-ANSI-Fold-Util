@@ -30,7 +30,7 @@ unexportable functions without them.
 
 Unless otherwise noted, these functions are executed in the same
 context as `ansi_fold` exported by `Text::ANSI::Fold` module. That
-is, the parameters set by `Text::ANSI::Fold-`configure> are
+is, the parameters set by `Text::ANSI::Fold->configure` are
 effective.
 
 - **width**(_text_)

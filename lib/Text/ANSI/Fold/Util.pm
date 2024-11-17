@@ -46,7 +46,7 @@ unexportable functions without them.
 
 Unless otherwise noted, these functions are executed in the same
 context as C<ansi_fold> exported by C<Text::ANSI::Fold> module. That
-is, the parameters set by C<Text::ANSI::Fold->configure> are
+is, the parameters set by C<< Text::ANSI::Fold->configure >> are
 effective.
 
 =over 7
