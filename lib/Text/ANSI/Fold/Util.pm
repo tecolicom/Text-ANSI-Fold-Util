@@ -44,6 +44,11 @@ functions are aware of ANSI terminal sequence.
 There are exportable functions start with B<ansi_> prefix, and
 unexportable functions without them.
 
+Unless otherwise noted, these functions are executed in the same
+context as C<ansi_fold> exported by C<Text::ANSI::Fold> module. That
+is, the parameters set by C<Text::ANSI::Fold->configure> are
+effective.
+
 =over 7
 
 =cut
@@ -89,8 +94,9 @@ sub substr {
     if ($offset < 0) {
 	$offset = max(0, $offset + ansi_width($text));
     }
-    my @s = Text::ANSI::Fold
-	->new(text => $text, width => [ $offset, $length // -1, -1 ])
+    state $fold = Text::ANSI::Fold->configure();
+    my @s = $fold
+	->configure(text => $text, width => [ $offset, $length // -1, -1 ])
 	->chops;
     if (defined $replacement) {
 	$s[0] . $replacement . ($s[2] // '');
@@ -127,7 +133,7 @@ Kazumasa Utashiro
 
 =head1 LICENSE
 
-Copyright 2020-2023 Kazumasa Utashiro.
+Copyright 2020-2024 Kazumasa Utashiro.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.

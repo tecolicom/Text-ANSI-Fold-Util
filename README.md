@@ -28,6 +28,11 @@ functions are aware of ANSI terminal sequence.
 There are exportable functions start with **ansi\_** prefix, and
 unexportable functions without them.
 
+Unless otherwise noted, these functions are executed in the same
+context as `ansi_fold` exported by `Text::ANSI::Fold` module. That
+is, the parameters set by `Text::ANSI::Fold-`configure> are
+effective.
+
 - **width**(_text_)
 - **ansi\_width**(_text_)
 
