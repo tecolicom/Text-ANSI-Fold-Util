@@ -16,7 +16,7 @@ Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
 
 # VERSION
 
-Version 1.01
+Version 1.02
 
 # DESCRIPTION
 
@@ -70,7 +70,7 @@ Kazumasa Utashiro
 
 # LICENSE
 
-Copyright 2020-2023 Kazumasa Utashiro.
+Copyright 2020-2024 Kazumasa Utashiro.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
