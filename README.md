@@ -43,13 +43,23 @@ effective.
 
     Returns substring just like Perl's **substr** function, but string
     position is calculated by the visible width on the screen instead of
-    number of characters.
+    number of characters.  If there is no corresponding substring, undef
+    is returned always.
 
-    If an optional _replacement_ parameter is given, replace the substring
-    by the replacement and return the entire string.
+    If the `padding` option is specified, then if there is a
+    corresponding substring, it is padded to the specified width and
+    returned.
 
-    It does not cut the text in the middle of multi-byte character, of
-    course.  Its behavior depends on the implementation of lower module.
+    It does not cut the text in the middle of multi-byte character.  If
+    you want to split the text in the middle of a wide character, specify
+    the `crackwide` option.
+
+        Text::ANSI::Fold->configure(crackwide => 1);
+
+    If an optional _replacement_ parameter is given, replace the
+    substring by the replacement and return the entire string.  If 0 is
+    specified for the width, there may be no error even if the
+    corresponding substring does not exist.
 
 # SEE ALSO
 

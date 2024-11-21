@@ -8,6 +8,9 @@ use Text::ANSI::Fold::Util qw(ansi_substr);
 
 $_ = "111222333";
 
+my $s = ansi_substr($_, 30, 30);
+is($s, undef, "undef");
+
 my $s = ansi_substr($_, 3, 3);
 is($s, "222", "ansi_substr");
 
@@ -26,6 +29,14 @@ is($s, "222333", "plain: negative offset, no length");
 my $s = Text::ANSI::Fold::Util::substr($_, 3, 3, "000");
 is($s, "111000333", "plain: replacement");
 
+my $s = Text::ANSI::Fold::Util::substr($_, 9, 0, "000");
+is($s, "111222333000", "plain: replacement (unmatch)");
+
+{
+local $TODO = "shoud be error";
+my $s = Text::ANSI::Fold::Util::substr($_, 10, 0, "000");
+is($s, undef, "plain: replacement for unmatched substr");
+}
 
 $_ = "\e[31m111222333\e[m";
 
