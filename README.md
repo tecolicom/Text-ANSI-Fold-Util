@@ -16,7 +16,7 @@ Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
 
 # VERSION
 
-Version 1.03
+Version 1.04
 
 # DESCRIPTION
 
