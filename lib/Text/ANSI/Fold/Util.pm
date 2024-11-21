@@ -94,10 +94,9 @@ sub substr {
     if ($offset < 0) {
 	$offset = max(0, $offset + ansi_width($text));
     }
-    state $fold = Text::ANSI::Fold->configure();
-    my @s = $fold
-	->configure(text => $text, width => [ $offset, $length // -1, -1 ])
-	->chops;
+    my @s = (state $fold = Text::ANSI::Fold->configure)
+	->text($text)
+	->chops(width => [ $offset, $length // -1, -1 ]);
     if (defined $replacement) {
 	$s[0] . $replacement . ($s[2] // '');
     } else {
