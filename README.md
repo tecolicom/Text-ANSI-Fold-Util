@@ -52,9 +52,9 @@ effective.
 
     It does not cut the text in the middle of multi-byte character.  If
     you want to split the text in the middle of a wide character, specify
-    the `crackwide` option.
+    the `splitwide` option.
 
-        Text::ANSI::Fold->configure(crackwide => 1);
+        Text::ANSI::Fold->configure(splitwide => 1);
 
     If an optional _replacement_ parameter is given, replace the
     substring by the replacement and return the entire string.  If 0 is
