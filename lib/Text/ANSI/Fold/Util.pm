@@ -66,7 +66,9 @@ BEGIN { push @EXPORT_OK, qw(&ansi_width) }
 sub ansi_width { goto &width }
 
 sub width {
-    (ansi_fold($_[0], -1))[2];
+    my $text = $_[0] // '';
+    # an empty or printable ASCII string is as wide as its length
+    $text !~ /[^\x20-\x7e]/ ? length $text : (ansi_fold($text, -1))[2];
 }
 
 

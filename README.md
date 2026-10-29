@@ -1,4 +1,4 @@
-[![Actions Status](https://github.com/tecolicom/Text-ANSI-Fold-Util/workflows/test/badge.svg)](https://github.com/tecolicom/Text-ANSI-Fold-Util/actions) [![MetaCPAN Release](https://badge.fury.io/pl/Text-ANSI-Fold-Util.svg)](https://metacpan.org/release/Text-ANSI-Fold-Util)
+[![Actions Status](https://github.com/tecolicom/Text-ANSI-Fold-Util/actions/workflows/test.yml/badge.svg?branch=master)](https://github.com/tecolicom/Text-ANSI-Fold-Util/actions?workflow=test) [![MetaCPAN Release](https://badge.fury.io/pl/Text-ANSI-Fold-Util.svg)](https://metacpan.org/release/Text-ANSI-Fold-Util)
 # NAME
 
 Text::ANSI::Fold::Util - Text::ANSI::Fold utilities (width, substr)
